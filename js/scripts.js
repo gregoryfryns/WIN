@@ -1,41 +1,48 @@
 $( document ).ready(function() {
 	var processTable = function (error, options, response) {
 		if (!error) {
-			var $email, $webpage, $researchDetails;
+			var cols, $tdEmail, $tdWebpage, $tdBrain, $tdDomain, $tdModalities, $tdMethods, $researchDetails;
 			
 			$('#results-table tr:gt(0)').each(function() {
-				$email = $(this).find('td:eq(1)');
-				$webpage = $(this).find('td:eq(2)');
-				$email.html($email.text().trim() ? '<a href="mailto:' + $email.text().trim() + '" class="btn btn-info"><i class="glyphicon glyphicon-envelope"></i></a>' : '');
-				$email.append($webpage.text().trim() ? '<a href="' + $webpage.text().trim() + '" target="_blank" class="btn btn-info"><i class="glyphicon glyphicon-user"></i></a>' : '');
-				$webpage.hide();
-				$research = $(this).find('td:eq(6)');
-				$forDomain = $(this).find('td:eq(7)');
-				$forModalidies = $(this).find('td:eq(8)');
-				$forMethods = $(this).find('td:eq(9)');
+				var $this = $(this);
+				$tdEmail = $this.find('td:eq(1)');
+				$tdWebpage = $this.find('td:eq(2)');
+				$tdBrain = $this.find('td:eq(6)');
+				$tdDomain = $this.find('td:eq(7)');
+				$tdModalities = $this.find('td:eq(8)');
+				$tdMethods = $this.find('td:eq(9)');
 				
-				$research.html('<dl class="researchDetails dl-horizontal"><dt>Brain Area</dt><dd>' + $research.text() + '</dd></dl>');
-				$researchDetails = $(this).find('td:eq(6) .researchDetails');
-				$researchDetails.append('<dt>Domain</dt><dd>' + $(this).find('td:eq(7)').text() + '</dd>');
-				$(this).find('td:eq(7)').hide();
-				$researchDetails.append('<dt>Modalities</dt><dd>' + $(this).find('td:eq(8)').text() + '</dd>');
-				$(this).find('td:eq(8)').hide();
-				$researchDetails.append('<dt>Methods</dt><dd>' + $(this).find('td:eq(9)').text() + '</dd>');
-				$(this).find('td:eq(9)').hide();
+				// Place email address & link to personal page in buttons
+				$tdEmail.html($tdEmail.text() ? '<a href="mailto:' + $tdEmail.text() + '" class="btn btn-info"><i class="glyphicon glyphicon-envelope"></i></a>' : '');
+				$tdEmail.append($tdWebpage.text() ? '<a href="' + $tdWebpage.text() + '" target="_blank" class="btn btn-info"><i class="glyphicon glyphicon-user"></i></a>' : '');
+				$tdWebpage.hide();
+				
+				// Merge all Fields of Research in one column
+				$('<td><dl class="researchDetails dl-horizontal"></dl></td>').insertBefore($tdBrain);
+				$researchDetails = $this.find ('td dl.researchDetails');
+				$researchDetails.append('<dt>Brain Area</dt><dd>' + $tdBrain.text() + '</dd>');
+				$tdBrain.hide();
+				$researchDetails.append('<dt>Domain</dt><dd>' + $tdDomain.text() + '</dd>');
+				$tdDomain.hide();
+				$researchDetails.append('<dt>Modalities</dt><dd>' + $tdModalities.text() + '</dd>');
+				$tdModalities.hide();
+				$researchDetails.append('<dt>Methods</dt><dd>' + $tdMethods.text() + '</dd>');
+				$tdMethods.hide();
 
 			});
 			
 			
 			// Rename headers
-			$('#results-table tr th:eq(0)').text('Name');
-			$('#results-table tr th:eq(1)').text('');
-			$('#results-table tr th:eq(6)').text('Field of Research');
-			$('#results-table tr th:eq(10)').text('Keywords');
+			$('#results-table tr:eq(0) th:eq(0)').text('Name');
+			$('#results-table tr:eq(0) th:eq(1)').text('');
+			$('<th>Field of Research</td>').insertBefore($('#results-table tr:eq(0) th:eq(6)'));
+			$('#results-table tr:eq(0) th:eq(11)').text('Keywords');
 			// Hide unnecessary headers
-			$('#results-table tr th:eq(2)').hide();
-			$('#results-table tr th:eq(7)').hide();
-			$('#results-table tr th:eq(8)').hide();
-			$('#results-table tr th:eq(9)').hide();
+			$('#results-table tr:eq(0) th:eq(2)').hide();
+			$('#results-table tr:eq(0) th:eq(7)').hide();
+			$('#results-table tr:eq(0) th:eq(8)').hide();
+			$('#results-table tr:eq(0) th:eq(9)').hide();
+			$('#results-table tr:eq(0) th:eq(10)').hide();
 			
 			// Update count
 			$('#search-message').text( $('#results-table tr:gt(0):visible').length + ' entries found');
@@ -65,14 +72,14 @@ $('#search').keyup(function() {
 			<!-- $(this).text(); -->
 			return !reg.test(text);
 		}).hide();
-		$('#form-container').removeClass('has-error');
-		// Update count
+		
+		$('#search-container').removeClass('has-error');
 		$('#search-message').text( $('#results-table tr:gt(0):visible').length + ' entries found');
 	}
 	catch (e) {
 		// alert(e);
 		$('#search-message').text('Error - please enter a valid string');
-		$('#form-container').addClass('has-error');
+		$('#search-container').addClass('has-error');
 	}
 
 });
