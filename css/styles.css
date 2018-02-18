@@ -1,19 +1,29 @@
 body {
-	background-color: #fafafa;
+	background-color: #e0f2f1;
+	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 
 body .container {
-	background-color: #ffffff;
 	padding-top: 20px;
 }
 
+#page-container {
+	background-color: #ffffff;
+}
+
 #header {
-	background-color: #41b6c4;
-	color: white;
+	background-color: #009688;
+	color: #ffffff;
+}
+
+#header a {
+	color: #e2f1af;
 }
 
 #results-table .btn {
 	margin: 4px;
+	background-color: #5bc4bd;
+	border-color: #009688;;
 }
 
 #results-table > tbody > tr > td {
@@ -27,5 +37,5 @@ dl.researchDetails dt {
 }
 
 dl.researchDetails dd {
-	margin-left: 110px;
+	margin-left: 90px;
 }
