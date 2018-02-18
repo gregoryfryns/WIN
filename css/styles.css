@@ -1,0 +1,21 @@
+body {
+	background-color: #ebebeb;
+}
+
+body .container {
+	background-color: #ffffff;
+}
+
+#results-table .btn {
+	margin: 4px;
+}
+
+dl.researchDetails dt {
+	width: 70px;
+	color: #777;
+	font-size: .8em;
+}
+
+dl.researchDetails dd {
+	margin-left: 110px;
+}
