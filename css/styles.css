@@ -20,6 +20,11 @@ body .container {
 	color: #e2f1af;
 }
 
+#search-container {
+	margin:auto;
+	max-width:600px
+}
+
 #results-table .btn {
 	margin: 4px;
 	background-color: #5bc4bd;
