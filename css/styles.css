@@ -3,21 +3,23 @@ body {
 	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 
-body .container {
+.page-container {
+	background-color: #ffffff;
 	padding-top: 20px;
 }
 
-#page-container {
-	background-color: #ffffff;
-}
-
-#header {
+.jumbotron {
 	background-color: #009688;
 	color: #ffffff;
+	margin-bottom: 0;
 }
 
-#header a {
+.jumbotron a {
 	color: #e2f1af;
+}
+
+.intro p {
+	font-size: medium;
 }
 
 #search-container {
@@ -31,16 +33,38 @@ body .container {
 	border-color: #009688;;
 }
 
-#results-table > tbody > tr > td {
+#results-table td {
 	white-space: normal;
 }
 
-dl.researchDetails dt {
+#results-table dl.researchDetails dt {
 	width: 70px;
 	color: #a7a7a7;
 	font-size: small;
 }
 
-dl.researchDetails dd {
+#results-table dl.researchDetails dd {
 	margin-left: 90px;
+}
+
+#back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9999;
+    background: #cacaca;
+    color: #fafafa;
+    cursor: pointer;
+    border: 0;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: opacity 0.2s ease-out;
+    opacity: 0;
+}
+#back-to-top:hover {
+    background: #009688;
+}
+
+#back-to-top.show {
+    opacity: 1;
 }
