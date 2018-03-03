@@ -56,7 +56,7 @@ $( document ).ready(function() {
 	
 });
 
-$('#search').keyup(function() {
+$('#search').keyup($.debounce(400, function() {
 	var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join(')(?=.*\\b') + ').*$',
 		text;
 	
@@ -68,7 +68,6 @@ $('#search').keyup(function() {
 			$(this).find('td').each(function() {
 				text += " " + $(this).text();
 			});
-			<!-- $(this).text(); -->
 			return !reg.test(text);
 		}).hide();
 		
@@ -76,12 +75,11 @@ $('#search').keyup(function() {
 		$('#search-message').text( $('#results-table tr:gt(0):visible').length + ' entries found');
 	}
 	catch (e) {
-		// alert(e);
 		$('#search-message').text('Error - please enter a valid string');
 		$('#search-container').addClass('has-error');
 	}
 
-});
+}));
 
 if ($('#back-to-top').length) {
     var scrollTrigger = 600, // px
